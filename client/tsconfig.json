@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "system",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        "typeCheck": true,
+        "jsx" : "react"
+    },
+    "include": [
+        "/src"
+    ],
+    "compileOnSave": false,
+    "files": [
+        "/typings/index.d.ts",
+        "/own_typings/ampersand-model.d.ts"
+    ]
+}

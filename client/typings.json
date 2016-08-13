@@ -1,0 +1,6 @@
+{
+  "dependencies": {},
+  "globalDependencies": {
+    "qwest": "registry:dt/qwest#1.7.0+20160317120654"
+  }
+}
