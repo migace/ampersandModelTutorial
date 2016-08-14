@@ -9,8 +9,6 @@ import PeopleBox from "./components/people/box"
 
 const socket = io("http://localhost:3001");
 
-getPerson('12345678901');
-
 if( document.readyState === "complete" ) {
     let getNewPersonFormData = () => {
         const firstname: any = document.getElementById('firstname'),

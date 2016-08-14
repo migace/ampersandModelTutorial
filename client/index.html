@@ -7,9 +7,70 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
 
+    <style>
+        body {
+            background-color: #333;
+        }
+
+        main.pure-g {
+            display: none;
+        }
+
+        .circle {
+          position: absolute;
+          border: 10px solid transparent;
+          border-top-color: #fff;
+          border-radius: 50%;
+          -webkit-animation: rotate linear infinite;
+                  animation: rotate linear infinite;
+        }
+
+        .circle.one {
+          height: 50px;
+          width: 50px;
+          left: 50px;
+          top: 50px;
+          -webkit-animation-duration: 0.85s;
+                  animation-duration: 0.85s;
+        }
+
+        .loader {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin: -90px 0 0 -90px;
+        }
+
+        @-webkit-keyframes rotate {
+          from {
+            -webkit-transform: rotateZ(360deg);
+                    transform: rotateZ(360deg);
+          }
+          to {
+            -webkit-transform: rotateZ(0deg);
+                    transform: rotateZ(0deg);
+          }
+        }
+
+        @keyframes rotate {
+          from {
+            -webkit-transform: rotateZ(360deg);
+                    transform: rotateZ(360deg);
+          }
+          to {
+            -webkit-transform: rotateZ(0deg);
+                    transform: rotateZ(0deg);
+          }
+        }
+    </style>
+
     <script src="jspm_packages/system.js"></script>
 </head>
 <body>
+    <div class="loader">
+        <div class="circle one"></div>
+    </div>
+
     <main class="pure-g">
         <section id="newPerson" class="pure-u-1-2 l-box">
             <header>
@@ -19,29 +80,31 @@
                 <fieldset>
                     <legend>Create new person</legend>
 
-                    <div class="pure-control-group">
-                        <label for="firstName">Imię</label>
-                        <input id="firstname" name="firstname" type="text" />
-                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-1-2 pure-u-md-1-2">
+                            <label for="firstName">Imię</label>
+                            <input id="firstname" class="pure-u-23-24" name="firstname" type="text" required />
+                        </div>
 
-                    <div class="pure-control-group">
-                        <label for="lastName">Nazwisko</label>
-                        <input id="lastname" name="lastname" type="text" />
-                    </div>
+                        <div class="pure-u-1-2 pure-u-md-1-2">
+                            <label for="lastName">Nazwisko</label>
+                            <input id="lastname" class="pure-input-1" name="lastname" type="text" required />
+                        </div>
 
-                    <div class="pure-control-group">
-                        <label for="pesel">Pesel</label>
-                        <input id="pesel" name="pesel" type="text" />
-                    </div>
+                        <div class="pure-u-1-2 pure-u-md-1-2">
+                            <label for="pesel">Pesel</label>
+                            <input id="pesel" class="pure-u-23-24" name="pesel" type="text" required pattern=".{11}" />
+                        </div>
 
-                    <div class="pure-control-group">
-                        <label for="email">E-mail</label>
-                        <input id="email" name="email" type="email" />
-                    </div>
+                        <div class="pure-u-1-2 pure-u-md-1-2">
+                            <label for="email">E-mail</label>
+                            <input id="email" class="pure-input-1" name="email" type="email" />
+                        </div>
 
-                    <div class="pure-control-group">
-                        <label for="description">Informacje</label>
-                        <textarea id="description" name="description"></textarea>
+                        <div class="pure-u-1 pure-u-md-1">
+                            <label for="description">Informacje</label>
+                            <textarea id="description" class="pure-input-1" name="description"></textarea>
+                        </div>
                     </div>
 
                     <button id="sendNewPersonForm" type="submit" class="pure-button pure-button-primary">Dodaj</button>

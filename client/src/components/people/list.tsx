@@ -19,7 +19,7 @@ export default class PeopleList extends React.Component<Props, State> {
 
         return (
             <div className="peopleList">
-                <table className="pure-table">
+                <table className="pure-table pure-table-horizontal">
                     <thead>
                         <tr>
                             <th>Name</th>

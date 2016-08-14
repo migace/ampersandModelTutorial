@@ -14,7 +14,9 @@ server.listen(3001);
 const DB_URL = 'mongodb://localhost:27017/ampersandModelTutorial',
       API_ERROR = {
           CREATE_PEOPLE: 410,
-      };
+      },
+      SKIP_MONGO_DATA = 0,
+      LIMIT_MONGO_DATA = 5;
 
 // variables
 let db;
@@ -79,25 +81,36 @@ app.get('/person/:pesel', (req, res) => {
     });
 });
 
-app.get('/person/', (req, res) => {
+app.get('/person/:skip?/:limit?', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("[API GET '/person'");
-    let cursor = db.collection('people').find({}).limit(req.body.limit || 5),
+    const skip = parseInt(req.params.skip) || SKIP_MONGO_DATA,
+          limit = parseInt(req.params.limit) || LIMIT_MONGO_DATA;
+
+    let cursor = db.collection('people').find({}).skip(skip).limit(limit),
         response = {
             data: [],
+            all: null,
+            skip,
+            limit,
         };
 
-    cursor.toArray((err, result) => {
-        if (err) {
-            console.log("[API GET '/person/'");
-            console.log(err);
-
-            res.end(JSON.stringify(response, null, 3));
+    db.collection('people').count({}, (err, count) => {
+        if (!err) {
+            response.all = count;
         }
 
-        response.data = result;
-        res.end(JSON.stringify(response, null, 3));
+        cursor.toArray((err, result) => {
+            if (err) {
+                console.log("[API GET '/person/'");
+                console.log(err);
+
+                res.end(JSON.stringify(response, null, 3));
+            }
+
+            response.data = result;
+            res.end(JSON.stringify(response, null, 3));
+        });
     });
 });
 
