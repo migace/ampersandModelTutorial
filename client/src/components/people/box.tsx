@@ -39,8 +39,6 @@ export default class PeopleBox extends React.Component<PeopleListProps, State> {
 
                 newData.data = oldData.concat(newData.data);
 
-                console.log(newData);
-
                 this.setState({
                     data: newData,
                     skip
@@ -56,6 +54,7 @@ export default class PeopleBox extends React.Component<PeopleListProps, State> {
         this.props.socket.on("new_person", (data) => {
             const newData = this.state.data;
             newData.data.push(data.data);
+
             this.setState({ data: newData });
         });
     }
@@ -76,9 +75,6 @@ export default class PeopleBox extends React.Component<PeopleListProps, State> {
         let content, currentData,
             start = this.state.skip,
             end = this.state.skip + CONSTANTS.LIMIT_DATA;
-
-        console.log(this.state.data.data);
-        console.log("slice("+start+","+end+")");
 
         currentData = this.state.data.data.slice(this.state.skip, this.state.skip + CONSTANTS.LIMIT_DATA);
 
