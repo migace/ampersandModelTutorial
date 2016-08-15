@@ -61,9 +61,10 @@ export default class PeopleBox extends React.Component<PeopleListProps, State> {
     }
 
     onNextPaginator(skip) {
-        console.log(skip);
         if (this.state.data.data.length < skip + CONSTANTS.LIMIT_DATA) {
             this.loadPeopleListFromServer(skip);
+        } else {
+            this.setState({skip});
         }
     }
 
